@@ -1,8 +1,3 @@
-var gameSceneVarHolder =
-{
-  gameScene.land = null;
-}
-
 var gameScene = {
     //"Awake" before start
     preload: function() {
@@ -17,7 +12,7 @@ var gameScene = {
 
     //Start function
     create: function() {
-      gameScene.land = game.add.bitmapData(0,0);
+      
     },
 
     //Called every frame
