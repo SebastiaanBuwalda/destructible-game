@@ -1,4 +1,4 @@
-terrainFunctions = {
+var terrainFunctions = {
     terrainDestruct: function(x, y, size, terrainToDestroy) {
         //this function destroys terrain in a circular form.
         terrainToDestroy.blendDestinationOut();
