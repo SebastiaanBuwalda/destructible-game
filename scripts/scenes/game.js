@@ -14,6 +14,11 @@ var gameScene = {
     create: function() {
         gameScene.player = gameScene.add.sprite(10, 10, 'player');
 
+        gameScene.bomb = gameScene.add.sprite(0, 0, 'bomb');
+        gameScene.bomb.visible = false;
+        gameScene.game.physics.enable(gameScene.bomb, Phaser.Physics.ARCADE);
+        gameScene.bomb.body.gravity.y = -800;
+
         gameScene.walls = gameScene.game.add.group();
 
         gameScene.playerSpeed = 170;
@@ -27,16 +32,19 @@ var gameScene = {
         gameScene.player.body.collideWorldBounds = true;
 
 
+
+
         var level = [
         '               ',
         '               ',
         '               ',
         '               ',
         '               ',
-        '               ',
-        '               ',
-        '              B',
-        '     B    B   B',
+        '               BBBBBBBBBBBBBB',
+        '              B B B B B B B BBBBB',
+        '             BBBBBBBBBBBBBBBB',
+        '             BB',
+        '     B    B  BB',
         '    BBB  BB  BB',
         'BBBBBBBBBBBBBBB'
       ];
@@ -46,12 +54,13 @@ var gameScene = {
           {
             if (level[i][j] == 'B')
             {
-              var wall = gameScene.game.add.sprite(30*j, 30+30*i, 'wall');
+              var wall = gameScene.game.add.sprite(30*j, 30*i, 'wall');
               gameScene.game.physics.enable(wall, Phaser.Physics.ARCADE);
               gameScene.walls.add(wall);
               wall.body.immovable = true;
               wall.body.moves = false;
             }
+
           }
       }
 
@@ -75,9 +84,10 @@ var gameScene = {
             gameScene.jumpTimer = gameScene.game.time.now + gameScene.jumpLongTime;
         }
 
-        if (gameScene.game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
-
-
+        if (gameScene.game.input.activePointer.isDown) {
+          gameScene.bomb.visible = true;
+          gameScene.bomb.reset(gameScene.player.x,gameScene.player.y);
+          gameScene.game.physics.arcade.moveToPointer(gameScene.bomb, 450);
         }
 
 
